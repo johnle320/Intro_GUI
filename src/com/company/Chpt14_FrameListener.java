@@ -3,8 +3,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-class Chpt14DefaultJFrame extends JFrame {
+/*
+In this class, instead of defining our own listener, we can make the frame itself is-a listener.
+ */
+class Chpt14_FrameListener extends JFrame implements ActionListener{
 
     private static final int FRAME_WIDTH = 300;
     private static final int FRAME_HEIGHT = 200;
@@ -13,7 +15,7 @@ class Chpt14DefaultJFrame extends JFrame {
     private Container contentPane;
     private JButton cancelButton, okButton;
 
-    Chpt14DefaultJFrame() {
+    Chpt14_FrameListener() {
         //set up the window'd properties
         this.setTitle("My First Subclass");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -46,37 +48,23 @@ class Chpt14DefaultJFrame extends JFrame {
         this.okButton.setSize(80, 30);
         this.cancelButton.setSize(80, 30);
 
-        //create a button event listener, the class which we have to write
-        ButtonHandler handler = new ButtonHandler();
         //add action listener:
-        this.cancelButton.addActionListener(handler);
-        this.okButton.addActionListener(handler);
+        this.cancelButton.addActionListener(this);
+        this.okButton.addActionListener(this);
     }
 
-    private class ButtonHandler implements ActionListener {
-        public void actionPerformed(ActionEvent evt) {
-            //get the source of the event:
-            JButton clickedButton = (JButton) evt.getSource();
+    public void actionPerformed(ActionEvent evt) {
+        //get the source of the event:
+        JButton clickedButton = (JButton) evt.getSource();
 
-            //get the text of the event source:
-            String buttontext = clickedButton.getText();
+        //get the text of the event source:
+        String buttontext = clickedButton.getText();
             /* way 2:
             String buttonText = evt.getActionCommand();
              */
-
-            //change the title of the frame accordingly
-            setTitle("You clicked " + buttontext);
-
-            /*
-            //if the ButtonHandler is declared and implemented outside of the Chpt14defaultJFrame (instead being nested here)
-            //then we have to get the frame that's is currently running. We obtain it through a root pane that contains
-            //the event-source (the button that was clicked). Then change the title of that frame in accordance with the event
-
-            JRootPane rootpane = clickedButton.getRootPane(); //get the root pane of the button
-            Frame frame = (JFrame) rootpane.getParent(); //get the frame
-            frame.setTitle("You clicked " + buttontext); //change the title of that frame in accordance with the event
-             */
-        }
+        //because the frame is already the action listener, so we don't have to retrieve the frame that contains the
+        //event source.
+        this.setTitle("You clicked " + buttontext); //change the title of that frame in accordance with the event
     }
 
     private void changeBkColor(Color color) {
