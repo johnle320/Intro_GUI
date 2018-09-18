@@ -79,32 +79,7 @@ class Chpt14_Frame1 extends JFrame{
         this.contentPane.add(inputLine);
 
         //create action listener by using anonymous inner class:
-        ActionListener okListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                JButton clickedButton = (JButton) evt.getSource();
-                String text = clickedButton.getText();
-                setTitle("You clicked: " + text);
-            }
-        };
 
-        ActionListener cancelListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                JButton clickedButton = (JButton) evt.getSource();
-                String text = clickedButton.getText();
-                setTitle("You clicked: " + text);
-            }
-        };
-
-        ActionListener textInputListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                JTextField textEntered = (JTextField) evt.getSource();
-                String text = textEntered.getText();
-                setTitle("You entered: " + text);
-            }
-        };
         /*
             //It makes more sense to name event-listeners to the name of the JOB THEY ARE listening to, rather than to the
             //type of the event-source, because for a set of similar components that do the same type of job, one event-handler
@@ -113,9 +88,32 @@ class Chpt14_Frame1 extends JFrame{
 
 
         //register Listeners to the event-sources
-        okButton.addActionListener(okListener);
-        cancelButton.addActionListener(cancelListener);
-        inputLine.addActionListener(textInputListener);
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                JButton clickedButton = (JButton) evt.getSource();
+                String text = clickedButton.getText();
+                setTitle("You clicked: " + text);
+            }
+        });
+
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                JButton clickedButton = (JButton) evt.getSource();
+                String text = clickedButton.getText();
+                setTitle("You clicked: " + text);
+            }
+        });
+
+        inputLine.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                JTextField textEntered = (JTextField) evt.getSource();
+                String text = textEntered.getText();
+                setTitle("You entered: " + text);
+            }
+        });
 
     }
 
