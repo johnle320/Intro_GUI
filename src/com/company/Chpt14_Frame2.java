@@ -1,10 +1,8 @@
 package com.company;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 
 /*
@@ -22,21 +20,21 @@ In Chpt14_FrameListener, we have:
         //and the other for the textfield input. Chpt14_Frame is no longer implementing ActionListener
 
  */
-class Chpt14_Frame1 extends JFrame{
+class Chpt14_Frame2 extends JFrame{
 
-    private static final int FRAME_WIDTH = 600;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 300;
+    private static final int FRAME_HEIGHT = 200;
     private static final int FRAME_X_ORIGIN = 150;
     private static final int FRAME_Y_ORIGIN = 250;
     private Container contentPane;
-    private JTextField inputLine;
+
     private JButton cancelButton, okButton;
 
-    private ImageIcon imageIcon;
-    private JLabel imageLabel;
-    private JLabel inputLineLabel;
+    private JTextField inputLine;
+    private JTextArea textArea;
 
-    Chpt14_Frame1() {
+
+    Chpt14_Frame2() {
         //set up the window'd properties
         this.setTitle("My First Subclass");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -70,19 +68,6 @@ class Chpt14_Frame1 extends JFrame{
         this.inputLine.setColumns(20);
         this.inputLine.setFont(new Font("Courier", Font.PLAIN, 14));
 
-        //load the image:
-        this.imageIcon = new ImageIcon("company/nhi.gif");
-        this.imageLabel = new JLabel(imageIcon);
-        imageLabel.setSize(50, 50);
-        this.contentPane.add(imageLabel);
-
-
-        //create a label for the text field:
-        this.inputLineLabel = new JLabel();
-        this.inputLineLabel.setText("Please enter your text here");
-        this.inputLineLabel.setSize(50, 150);
-
-
         //stage GUI objects:
             /*
             //We can add those GUI objects into JFrame
@@ -93,12 +78,9 @@ class Chpt14_Frame1 extends JFrame{
 
         //but one thing is that JFrame cannot be added to anything else once we want it to. So it is always better to
         //add GUI objects to a container:
-
-        this.contentPane.add(inputLineLabel);
-        this.contentPane.add(inputLine);
         this.contentPane.add(okButton);
         this.contentPane.add(cancelButton);
-
+        this.contentPane.add(inputLine);
 
         //create action listener by using anonymous inner class:
 
