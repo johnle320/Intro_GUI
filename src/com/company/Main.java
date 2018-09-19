@@ -1,10 +1,14 @@
 package com.company;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         /*
         //Frame with separately-created action listener
@@ -20,9 +24,9 @@ public class Main {
         listener_frame.setVisible(true);
          */
 
-        JFrame frame = new Chpt14_Frame1();
-        frame.setVisible(true);
-
+        JFrame listener_frame;
+        listener_frame = new Chpt14_Frame1();
+        listener_frame.setVisible(true);
 
     }
 }

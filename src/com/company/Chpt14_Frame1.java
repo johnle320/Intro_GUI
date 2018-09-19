@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.IOException;
 
 
 /*
@@ -24,19 +24,20 @@ In Chpt14_FrameListener, we have:
  */
 class Chpt14_Frame1 extends JFrame{
 
-    private static final int FRAME_WIDTH = 600;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 300;
+    private static final int FRAME_HEIGHT = 200;
     private static final int FRAME_X_ORIGIN = 150;
     private static final int FRAME_Y_ORIGIN = 250;
     private Container contentPane;
     private JTextField inputLine;
     private JButton cancelButton, okButton;
 
+    private Image img;
     private ImageIcon imageIcon;
     private JLabel imageLabel;
     private JLabel inputLineLabel;
 
-    Chpt14_Frame1() {
+    Chpt14_Frame1() throws IOException {
         //set up the window'd properties
         this.setTitle("My First Subclass");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -71,11 +72,42 @@ class Chpt14_Frame1 extends JFrame{
         this.inputLine.setFont(new Font("Courier", Font.PLAIN, 14));
 
         //load the image:
-        this.imageIcon = new ImageIcon("company/nhi.gif");
-        this.imageLabel = new JLabel(imageIcon);
-        imageLabel.setSize(50, 50);
-        this.contentPane.add(imageLabel);
+//        this.imageIcon = new ImageIcon("/resources/images/java.png");
+//        this.imageLabel = new JLabel(imageIcon);
+//        this.imageLabel.setSize(50, 50);
+//        this.contentPane.add(imageLabel);
 
+
+
+        /*
+        //way 1 to use new ImageIcon()
+            this.imageIcon = createImageIcon("/com/company/java.png", "my lovely wife says: ");
+
+            // Returns an ImageIcon, or null if the path was invalid.
+            protected ImageIcon createImageIcon(String path,
+                    String description) {
+                java.net.URL imgURL = getClass().getResource(path);
+                if (imgURL != null) {
+                    System.out.println("path is: " + imgURL);
+                    return new ImageIcon(imgURL, description);
+                } else {
+                    System.err.println("Couldn't find file: " + path);
+                    return null;
+                }
+            }
+
+        //way 2 to use new ImageIcon()
+            String imgPath = "C:/Users/jbvul/IdeaProjects/Intro_GUI/out/production/Intro_GUI/com/company/java.png";
+            this.imageIcon = new ImageIcon(imgPath, "my lovely wife says: ");
+         */
+
+        //Image Instance is where the image is stored
+        this.img = ImageIO.read(getClass().getResource("/resources/images/nhi.JPG"));
+        this.img = img.getScaledInstance(50, 50, Image.SCALE_DEFAULT); //scale down the image
+        this.imageIcon = new ImageIcon(img); //create an imageIcon with desired image
+        this.imageLabel = new JLabel(imageIcon);
+        this.imageLabel.setSize(100, 100); //not sure if it matters
+        this.contentPane.add(imageLabel);
 
         //create a label for the text field:
         this.inputLineLabel = new JLabel();
