@@ -14,7 +14,8 @@ class Chpt14DefaultJFrame extends JFrame {
     private JButton cancelButton, okButton;
 
     Chpt14DefaultJFrame() {
-        //set up the window'd properties
+
+        //set up the frame's properties:
         this.setTitle("My First Subclass");
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setLocation(FRAME_X_ORIGIN, FRAME_Y_ORIGIN);
@@ -59,13 +60,13 @@ class Chpt14DefaultJFrame extends JFrame {
             JButton clickedButton = (JButton) evt.getSource();
 
             //get the text of the event source:
-            String buttontext = clickedButton.getText();
+            String buttonText = clickedButton.getText();
             /* way 2:
             String buttonText = evt.getActionCommand();
              */
 
             //change the title of the frame accordingly
-            setTitle("You clicked " + buttontext);
+            setTitle("You clicked " + buttonText);
 
             /*
             //if the ButtonHandler is declared and implemented outside of the Chpt14defaultJFrame (instead being nested here)
@@ -74,7 +75,7 @@ class Chpt14DefaultJFrame extends JFrame {
 
             JRootPane rootpane = clickedButton.getRootPane(); //get the root pane of the button
             Frame frame = (JFrame) rootpane.getParent(); //get the frame
-            frame.setTitle("You clicked " + buttontext); //change the title of that frame in accordance with the event
+            frame.setTitle("You clicked " + buttonText); //change the title of that frame in accordance with the event
              */
         }
     }
